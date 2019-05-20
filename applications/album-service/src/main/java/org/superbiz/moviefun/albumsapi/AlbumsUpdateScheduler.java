@@ -1,4 +1,4 @@
-package org.superbiz.moviefun.albums;
+package org.superbiz.moviefun.albumsapi;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,20 +30,20 @@ public class AlbumsUpdateScheduler {
     @Scheduled(initialDelay = 5 * SECONDS, fixedRate = 15 * SECONDS)
     public void run() {
         try {
-            logger.debug("Checking for albums task to start");
+            logger.debug("Checking for albumsapi task to start");
 
             if (startAlbumSchedulerTask()) {
-                logger.debug("Starting albums update");
+                logger.debug("Starting albumsapi update");
 
                 albumsUpdater.update();
 
-                logger.debug("Finished albums update");
+                logger.debug("Finished albumsapi update");
             } else {
                 logger.debug("Nothing to start");
             }
 
         } catch (Throwable e) {
-            logger.error("Error while updating albums", e);
+            logger.error("Error while updating albumsapi", e);
         }
     }
 

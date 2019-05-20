@@ -16,6 +16,7 @@
  */
 package org.superbiz.moviefun.movies;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -53,6 +54,7 @@ public class Movie implements Serializable {
         this.title = title;
         this.year = year;
     }
+
 
     public long getId() {
         return id;

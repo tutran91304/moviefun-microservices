@@ -1,4 +1,4 @@
-package org.superbiz.moviefun;
+package org.superbiz.moviefun.albumsapi;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -6,23 +6,14 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.superbiz.moviefun.moviesapi.MovieServlet;
+import org.superbiz.moviefun.ServiceCredentials;
 import org.superbiz.moviefun.blobstore.BlobStore;
 import org.superbiz.moviefun.blobstore.S3Store;
 
 @SpringBootApplication
-public class Application {
-
-    public static void main(String... args) {
-        SpringApplication.run(Application.class, args);
-    }
-
-    @Bean
-    public ServletRegistrationBean actionServletRegistration(MovieServlet movieServlet) {
-        return new ServletRegistrationBean(movieServlet, "/moviefun/*");
-    }
+public class AlbumServiceApplication {
+    public static void main(String... args) { SpringApplication.run(AlbumServiceApplication.class, args); }
 
     @Bean
     ServiceCredentials serviceCredentials(@Value("${vcap.services}") String vcapServices) {
@@ -31,8 +22,8 @@ public class Application {
 
     @Bean
     public BlobStore blobStore(
-        ServiceCredentials serviceCredentials,
-        @Value("${vcap.services.photo-storage.credentials.endpoint:#{null}}") String endpoint
+            ServiceCredentials serviceCredentials,
+            @Value("${vcap.services.photo-storage.credentials.endpoint:#{null}}") String endpoint
     ) {
         String photoStorageAccessKeyId = serviceCredentials.getCredential("photo-storage", "user-provided", "access_key_id");
         String photoStorageSecretKey = serviceCredentials.getCredential("photo-storage", "user-provided", "secret_access_key");
@@ -48,3 +39,7 @@ public class Application {
         return new S3Store(s3Client, photoStorageBucket);
     }
 }
+
+
+
+
