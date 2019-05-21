@@ -1,4 +1,4 @@
-package org.superbiz.moviefun.albumsapi;
+package org.superbiz.moviefun;
 
 import org.junit.Test;
 import org.superbiz.moviefun.ServiceCredentials;

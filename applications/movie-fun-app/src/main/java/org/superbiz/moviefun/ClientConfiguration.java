@@ -12,7 +12,7 @@ import org.superbiz.moviefun.moviesapi.MoviesClient;
 public class ClientConfiguration {
 
     @Value("${movies.url}") String moviesUrl;
-    @Value("${albumsapi.url}") String albumsUrl;
+    @Value("${albums.url}") String albumsUrl;
 
     @Bean
     public RestOperations restOperations() {
